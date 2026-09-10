@@ -1,0 +1,27 @@
+{
+  "title": "Contact",
+  "subtitle": "Let's turn your ideas into real projects.",
+  "body": "Have a project in mind, a question or a collaboration opportunity? We'd love to hear from you. Get in touch with the right person and we'll get back to you as soon as possible.",
+  "people": [
+    {
+      "slug": "designer-on-duty",
+      "name": "Designer on duty",
+      "role": "Discuss your ideas, get a quote or work on your project.",
+      "phone": "+383 48 30 31 32",
+      "availability": "Available in office",
+      "image": "/images/team/designer.jpg",
+      "width": 1100,
+      "height": 896
+    },
+    {
+      "slug": "kushtrim-abdullahu",
+      "name": "Kushtrim Abdullahu / CEO",
+      "role": "For partnerships, larger projects and strategic discussions.",
+      "phone": "+383 48 500 292",
+      "availability": "Available during working hours",
+      "image": "/images/team/ceo.jpg",
+      "width": 1100,
+      "height": 896
+    }
+  ]
+}

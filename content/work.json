@@ -1,0 +1,72 @@
+{
+  "title": "Our work",
+  "subtitle": "solutions that stand out.",
+  "categories": [
+    {
+      "slug": "totems",
+      "title": "Totems",
+      "cardDescription": "Custom totems that make your brand visible from every distance.",
+      "description": "Totems are a powerful way to present your brand in any environment. We design and produce custom totems that are durable, visible and tailored to your identity.",
+      "illustration": { "src": "/images/illustrations/totem.png", "width": 700, "height": 1050 },
+      "projects": [
+        { "slug": "via-billboard", "title": "VIA Billboard", "image": "/images/projects/totems/billboard-via.jpg", "width": 1200, "height": 1600 },
+        { "slug": "mefix-totem", "title": "MEFIX Totem", "image": "/images/projects/totems/billboard-mefix.jpg", "width": 1200, "height": 1600 },
+        { "slug": "dumnica-billboard", "title": "Dumnica Billboard", "image": "/images/projects/totems/billboard-dumnica.jpg", "width": 1200, "height": 1600 },
+        { "slug": "auris-mall-totem", "title": "Auris Mall Totem", "image": "/images/projects/totems/totem-auris-mall.jpg", "width": 1200, "height": 1600 }
+      ]
+    },
+    {
+      "slug": "3d-sign",
+      "title": "3D Sign",
+      "cardDescription": "Three-dimensional signage that adds depth, impact and identity.",
+      "description": "Three-dimensional signage turns a facade into a landmark. We build illuminated letters, box signs and dimensional logos that hold their shape, their colour and their impact for years.",
+      "illustration": { "src": "/images/illustrations/3d-sign.png", "width": 860, "height": 573 },
+      "projects": [
+        { "slug": "graniti-market", "title": "Graniti Market", "image": "/images/projects/3d-sign/market-graniti.jpg", "width": 1200, "height": 899 },
+        { "slug": "kpm-store", "title": "KPM Store", "image": "/images/projects/3d-sign/kpm-store.jpg", "width": 1200, "height": 899 },
+        { "slug": "pizza-crust", "title": "Pizza Crust", "image": "/images/projects/3d-sign/pizza-crust.jpg", "width": 1200, "height": 1600 },
+        { "slug": "furra-bakery-graniti", "title": "Furra Bakery Graniti", "image": "/images/projects/3d-sign/furra-bakery-graniti.jpg", "width": 1200, "height": 900 },
+        { "slug": "graniti-facade", "title": "Graniti Facade", "image": "/images/projects/3d-sign/graniti-facade.jpg", "width": 1200, "height": 900 },
+        { "slug": "cryptolbania-exchange", "title": "Cryptolbania Exchange", "image": "/images/projects/3d-sign/cryptolbania-exchange.jpg", "width": 1200, "height": 2132 }
+      ]
+    },
+    {
+      "slug": "displays",
+      "title": "Displays",
+      "cardDescription": "Innovative display solutions that showcase products and boost sales.",
+      "description": "A display has one job: to move product. We design, produce and install in-store displays that fit the shelf, survive the traffic and put the brand exactly where the shopper is looking.",
+      "illustration": { "src": "/images/illustrations/display.png", "width": 700, "height": 1050 },
+      "projects": [
+        { "slug": "nuts-corner", "title": "Nuts Corner", "image": "/images/projects/displays/nuts-corner.jpg", "width": 1200, "height": 900 },
+        { "slug": "jaffa-gondola", "title": "Jaffa Gondola", "image": "/images/projects/displays/jaffa-gondola.jpg", "width": 1200, "height": 900 },
+        { "slug": "piano-perfume", "title": "Piano Perfume", "image": "/images/projects/displays/piano-perfume.jpg", "width": 1200, "height": 900 },
+        { "slug": "tadim-island", "title": "Tadım Island", "image": "/images/projects/displays/tadim-island.jpg", "width": 1200, "height": 900 },
+        { "slug": "ceresit-aero-360", "title": "Ceresit Aero 360°", "image": "/images/projects/displays/ceresit-aero360.jpg", "width": 1200, "height": 1600 },
+        { "slug": "sponge-rack", "title": "Sponge Rack", "image": "/images/projects/displays/sponge-display.jpg", "width": 1200, "height": 900 }
+      ]
+    },
+    {
+      "slug": "vehicle-wraps",
+      "title": "Vehicle Wraps",
+      "cardDescription": "Creative vehicle branding that turns every ride into an ad.",
+      "description": "A wrapped vehicle is a billboard that goes to the customer. We print, laminate and fit full and partial wraps that follow every curve and stay sharp through weather and washes.",
+      "illustration": { "src": "/images/illustrations/vehicle-wrap.png", "width": 900, "height": 600 },
+      "projects": []
+    },
+    {
+      "slug": "interior-design",
+      "title": "Interior Design",
+      "cardDescription": "Functional and aesthetic interior design for modern spaces.",
+      "description": "From concept to handover, we shape interiors that carry a brand: retail floors, stands, lounges and offices where the space itself does the talking.",
+      "illustration": { "src": "/images/illustrations/interior-design.png", "width": 900, "height": 600 },
+      "projects": [
+        { "slug": "pixels-stacked-booth", "title": "Pixels × Stacked Booth", "image": "/images/projects/interior-design/pixels-stacked-booth.jpg", "width": 1200, "height": 2133 },
+        { "slug": "binance-facade", "title": "Binance Facade", "image": "/images/projects/interior-design/binance-facade.jpg", "width": 1200, "height": 2133 },
+        { "slug": "binance-lounge", "title": "Binance Lounge", "image": "/images/projects/interior-design/binance-lounge.jpg", "width": 1200, "height": 900 },
+        { "slug": "bbs-cube", "title": "BBS Cube", "image": "/images/projects/interior-design/bbs-cube.jpg", "width": 1200, "height": 2133 },
+        { "slug": "zetarium-stand", "title": "Zetarium Stand", "image": "/images/projects/interior-design/zetarium-stand.jpg", "width": 1200, "height": 2133 },
+        { "slug": "binance-stairs", "title": "Binance Stairs", "image": "/images/projects/interior-design/binance-stairs.jpg", "width": 1200, "height": 2133 }
+      ]
+    }
+  ]
+}

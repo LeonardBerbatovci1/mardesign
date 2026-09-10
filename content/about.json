@@ -1,0 +1,22 @@
+{
+  "title": "About",
+  "subtitle": "Our story, built through ideas",
+  "body": "Mardesign is a creative production company turning ideas into real-world brand experiences. From signage and displays to complete interior and exterior solutions, we design, produce and install everything under one roof.",
+  "cta": { "label": "Work with us", "href": "/contact" },
+  "image": {
+    "src": "/images/illustrations/building.png",
+    "alt": "The Mardesign production facility",
+    "width": 1600,
+    "height": 689
+  },
+  "story": {
+    "title": "Our story",
+    "subtitle": "A journey of growth, partnership and bigger ideas",
+    "milestones": [
+      { "year": "2014", "title": "The beginning", "body": "Mardesign starts with one idea and a passion for visual production." },
+      { "year": "2018", "title": "First big projects", "body": "From local signage to larger commercial projects." },
+      { "year": "2021", "title": "We grew", "body": "New equipment. New people. Bigger possibilities." },
+      { "year": "2026", "title": "Beyond borders", "body": "Projects delivered locally and internationally." }
+    ]
+  }
+}

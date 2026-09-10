@@ -1,0 +1,19 @@
+{
+  "hero": {
+    "eyebrow": "Exclusively for the Balkans",
+    "title": "Voted the most beautiful display in the Balkans.",
+    "titleAccent": "Now with an exclusive partner",
+    "body": "Mardesign is the only authorized company to supply this unique display design throughout the Balkans.",
+    "cta": { "label": "Discover more", "href": "/work" },
+    "image": {
+      "src": "/images/hero/display-wilkinson.png",
+      "alt": "Wilkinson Sword retail display designed and produced by Mardesign",
+      "width": 860,
+      "height": 1290
+    },
+    "badges": [
+      { "src": "/images/hero/badge-award.png", "alt": "Zgjedhur rafti më i bukur në Ballkan", "width": 380, "height": 376 },
+      { "src": "/images/hero/badge-exclusive.png", "alt": "Ekskluzivisht për Ballkanin", "width": 380, "height": 384 }
+    ]
+  }
+}

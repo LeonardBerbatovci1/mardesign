@@ -1,0 +1,59 @@
+{
+  "name": "Mardesign",
+  "wordmark": "MARDESIGN",
+  "tagline": "DIGITAL PRINT",
+  "script": "we design, we finalise",
+  "url": "https://mardesign-ks.com",
+  "primaryNav": [
+    { "label": "Work", "href": "/work" },
+    { "label": "About", "href": "/about" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "secondaryNav": [
+    { "label": "Service", "href": "/work" },
+    { "label": "People", "href": "/contact" },
+    { "label": "Diary", "href": "/about" }
+  ],
+  "cta": { "label": "Start a project", "href": "/contact" },
+  "social": [
+    { "platform": "linkedin", "href": "https://www.linkedin.com/" },
+    { "platform": "facebook", "href": "https://www.facebook.com/" },
+    { "platform": "instagram", "href": "https://www.instagram.com/" },
+    { "platform": "whatsapp", "href": "https://wa.me/38348303132" }
+  ],
+  "contact": {
+    "location": ["Prishtinë Veternik", "Kosova"],
+    "email": "info@mardesign-ks.com",
+    "workingHours": "Mon - Fri: 08:00 - 17:00"
+  },
+  "seo": {
+    "title": "Mardesign — Signage, Large-Format Print & Retail Environments in Prishtina",
+    "description": "Mardesign is a Prishtina-based production studio for signage, large-format digital print, in-store displays, vehicle wraps and retail interiors. We design, produce and install everything under one roof, across Kosovo and the Balkans.",
+    "keywords": [
+      "signage company Prishtina",
+      "large-format print Kosovo",
+      "digital print Prishtina",
+      "3D illuminated signage Kosovo",
+      "vehicle wrapping Prishtina",
+      "retail displays Balkans",
+      "POS displays Kosovo",
+      "totem signs Kosovo",
+      "shop fit-out Prishtina",
+      "brand environments Balkans"
+    ]
+  },
+  "business": {
+    "legalName": "Mardesign",
+    "foundingYear": "2014",
+    "priceRange": "$$",
+    "phone": "+383 48 500 292",
+    "streetAddress": "Veternik",
+    "addressLocality": "Prishtinë",
+    "addressRegion": "Prishtinë",
+    "postalCode": "10000",
+    "addressCountry": "XK",
+    "latitude": 42.6291,
+    "longitude": 21.1437,
+    "areaServed": ["Kosovo", "Albania", "North Macedonia", "Montenegro", "Balkans"]
+  }
+}

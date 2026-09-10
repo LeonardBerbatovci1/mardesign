@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Palette, sampled from the design ───────────────────────────── */
+  --color-ink: #154553; /* page ground: deep teal */
+  --color-ink-deep: #103641; /* darker teal, footer / recessed areas */
+  --color-panel: #1b4755; /* card + nav pill fill */
+  --color-accent: #42aa9f; /* mint: buttons, script, active states */
+  --color-accent-soft: #a7d9d8; /* pale mint: subheads, muted labels */
+  --color-neon: #22d3ee; /* cyan: wireframe glow, hairlines */
+  --color-hairline: #4e8b93; /* card borders */
+
+  /* ── Type ───────────────────────────────────────────────────────── */
+  --font-display: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-script: var(--font-caveat-brush), ui-rounded, cursive;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    overflow-x: clip;
+    background-color: var(--color-ink);
+    color: #fff;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* The blueprint grid + paper noise that sits under every page. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image: url("/images/bg/blueprint.jpg");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.85;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      120% 90% at 50% 0%,
+      transparent 40%,
+      color-mix(in srgb, var(--color-ink-deep) 65%, transparent) 100%
+    );
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: #06232b;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-soft);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Big all-caps page titles: "OUR WORK", "TOTEMS", "CONTACT". */
+  .display-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: -0.015em;
+  }
+
+  /* "solutions that stand out." — the mint line under every title. */
+  .display-sub {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    color: var(--color-accent);
+  }
+
+  /* "we design, we finalise" */
+  .script-mark {
+    font-family: var(--font-script);
+    color: var(--color-accent);
+    line-height: 1;
+  }
+
+  .panel {
+    background: color-mix(in srgb, var(--color-panel) 78%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-hairline) 70%, transparent);
+    backdrop-filter: blur(2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
