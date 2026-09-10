@@ -56,8 +56,21 @@ export function Footer({ site }: { site: Site }) {
         </div>
       </div>
 
-      <div className="border-t border-hairline/25 px-6 py-6 text-center text-xs text-white/50 sm:px-10 lg:px-16">
-        © {new Date().getFullYear()} {site.name}. All rights reserved.
+      <div className="flex flex-col items-center gap-1.5 border-t border-hairline/25 px-6 py-6 text-center text-xs text-white/50 sm:flex-row sm:justify-between sm:px-10 lg:px-16">
+        <p>
+          © {new Date().getFullYear()} {site.name}. Copyright reserved.
+        </p>
+        <p>
+          Powered by{" "}
+          <a
+            href="https://porositweb.com"
+            target="_blank"
+            rel="noopener"
+            className="font-medium text-white/70 transition-colors hover:text-accent"
+          >
+            PorositWeb
+          </a>
+        </p>
       </div>
     </footer>
   );
