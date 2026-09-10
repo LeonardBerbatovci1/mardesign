@@ -29,16 +29,23 @@ This lives **outside** the deployed app so redeploys never touch it.
 
 ## 3. Set environment variables
 
-hPanel → your Node app → **Environment Variables**:
+**hPanel → your Node app → Advanced → Environment Variables** → *Add variable*
+for each row. The dashboard login (`/admin`) will show "ADMIN_PASSWORD is not
+set" until at least the first two are in place.
 
-| Name | Value |
-| --- | --- |
-| `ADMIN_PASSWORD` | a long passphrase for the client |
-| `AUTH_SECRET` | 32+ random characters (`openssl rand -hex 32`) |
-| `CONTENT_DIR` | `/home/uXXXXXXXX/mardesign-data` — the folder from step 2, absolute path (check `pwd` in SSH) |
-| `NODE_ENV` | `production` |
+| Name | Value | How to get it |
+| --- | --- | --- |
+| `ADMIN_PASSWORD` | the client's dashboard password | pick a long passphrase, e.g. `lantern-vellum-delta-meadow-1994` |
+| `AUTH_SECRET` | a 64-char random string | run `openssl rand -hex 32` in SSH, or `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` |
+| `CONTENT_DIR` | absolute path to the folder from step 2 | run `pwd` inside `~/mardesign-data` over SSH and copy the result, e.g. `/home/u123456/mardesign-data` |
+| `NEXT_PUBLIC_SITE_URL` | the live domain, no trailing slash | e.g. `https://mardesign-ks.com` |
+| `NODE_ENV` | `production` | literally `production` |
 
-Redeploy after setting these.
+Optional: `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` (Search Console token),
+`NEXT_PUBLIC_GA_ID` (Google Analytics `G-XXXXXXX`).
+
+**Click "Save", then redeploy** (or restart the app) — variables are only read
+when the app starts.
 
 ## 4. Domain
 

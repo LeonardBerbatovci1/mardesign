@@ -13,6 +13,30 @@ npm start          # serve the production build
 npm run typecheck  # tsc --noEmit
 ```
 
+## First-time setup
+
+The dashboard needs two secrets. They are **not** in git — create them once.
+
+**Local development:** create a file named `.env.local` in the project root:
+
+```
+ADMIN_PASSWORD=pick-any-password-for-local
+AUTH_SECRET=paste-a-random-string-here
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+Generate `AUTH_SECRET` with:
+
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+Then `npm run dev` and open http://localhost:3000/admin — log in with the
+`ADMIN_PASSWORD` you chose. Restart the dev server after editing `.env.local`.
+
+**Production (Hostinger):** set the same variables in the hosting panel, plus
+`CONTENT_DIR` — see [docs/DEPLOY-HOSTINGER.md](docs/DEPLOY-HOSTINGER.md).
+
 ## Routes
 
 | Route                  | Deck page | Contents                                              |
