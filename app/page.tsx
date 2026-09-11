@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Footer } from "@/components/Footer";
+import { HeroDisplay } from "@/components/HeroDisplay";
 import { HomeNav } from "@/components/HomeNav";
 import { LogoLockup } from "@/components/Logo";
 import { Social } from "@/components/Social";
@@ -41,7 +42,7 @@ export default async function HomePage() {
       </div>
 
       <main id="main">
-        <section className="mx-auto grid w-full max-w-[1700px] grid-cols-1 items-center gap-10 px-6 pb-16 pt-10 sm:px-10 lg:grid-cols-[1.12fr_1.1fr] lg:gap-8 lg:px-16 lg:pb-24 lg:pt-4">
+        <section className="mx-auto grid w-full max-w-[1700px] grid-cols-1 items-center gap-10 px-6 pb-10 pt-10 sm:px-10 lg:grid-cols-[1.12fr_1.1fr] lg:gap-8 lg:px-16 lg:pb-12 lg:pt-4">
           <div className="min-w-0">
             <p className="text-[clamp(0.95rem,1.6vw,1.4rem)] font-light uppercase tracking-[0.06em] text-accent">
               {hero.eyebrow}
@@ -65,21 +66,17 @@ export default async function HomePage() {
               {hero.cta.label}
             </Link>
 
-            <Social links={site.social} className="mt-14 [&_svg]:size-7" />
+            <Social links={site.social} className="mt-10 [&_svg]:size-7" />
           </div>
 
-          {/* Product shot with the two award badges pinned to it. */}
-          <div className="relative mx-auto w-fit max-w-full min-w-0">
-            <Image
-              src={hero.image.src}
-              alt={hero.image.alt ?? ""}
-              width={hero.image.width}
-              height={hero.image.height}
-              priority
-              sizes="(max-width: 1024px) 90vw, 680px"
-              className="mx-auto h-auto w-full max-w-[min(88vw,600px)] drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)] lg:max-h-[74dvh] lg:w-auto lg:max-w-none"
-            />
-
+          {/* Product shot: outline animates around the shelf, the whole shot
+              links through to the project, badges pinned to it. */}
+          <HeroDisplay
+            image={hero.image}
+            reflection={hero.reflection}
+            href={hero.shelfHref}
+            label={`${hero.title} — view this project`}
+          >
             {hero.badges[0] && (
               <Image
                 src={hero.badges[0].src}
@@ -87,7 +84,7 @@ export default async function HomePage() {
                 width={hero.badges[0].width}
                 height={hero.badges[0].height}
                 sizes="(max-width: 640px) 26vw, 190px"
-                className="absolute left-0 top-[34%] w-[24%] max-w-[185px] -translate-x-[8%] lg:-translate-x-[45%]"
+                className="pointer-events-none absolute left-0 top-[34%] w-[24%] max-w-[185px] -translate-x-[8%] lg:-translate-x-[45%]"
               />
             )}
 
@@ -98,10 +95,10 @@ export default async function HomePage() {
                 width={hero.badges[1].width}
                 height={hero.badges[1].height}
                 sizes="(max-width: 640px) 26vw, 190px"
-                className="absolute bottom-[8%] right-0 w-[24%] max-w-[185px] translate-x-[8%] lg:translate-x-[20%]"
+                className="pointer-events-none absolute bottom-[24%] right-0 w-[24%] max-w-[185px] translate-x-[8%] lg:translate-x-[20%]"
               />
             )}
-          </div>
+          </HeroDisplay>
         </section>
       </main>
 

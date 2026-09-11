@@ -3,9 +3,10 @@ import Image from "next/image";
 import type { Milestone } from "@/lib/types";
 
 /**
- * The 2014 → 2026 "Our story" track. The deck draws an empty photo frame under
- * each milestone, but ships no images — so on the live site the frame only
- * appears once a photo is attached (in the dashboard, About → Timeline).
+ * The 2014 → 2026 "Our story" track. Each milestone reserves a photo frame, as
+ * the deck draws it: with a photo attached (dashboard, About → Timeline) the
+ * image fills it, otherwise an empty outlined frame holds the slot so the row
+ * keeps its rhythm and the gaps are ready for photos.
  */
 export function Timeline({ milestones }: { milestones: Milestone[] }) {
   return (
@@ -31,7 +32,7 @@ export function Timeline({ milestones }: { milestones: Milestone[] }) {
             {milestone.body}
           </p>
 
-          {milestone.image && (
+          {milestone.image ? (
             <Image
               src={milestone.image}
               alt={`${milestone.year} — ${milestone.title}`}
@@ -39,6 +40,11 @@ export function Timeline({ milestones }: { milestones: Milestone[] }) {
               height={420}
               sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 22vw"
               className="mt-5 aspect-[4/3] w-full rounded-lg object-cover"
+            />
+          ) : (
+            <div
+              aria-hidden="true"
+              className="mt-5 aspect-[4/3] w-full rounded-lg border-2 border-dashed border-hairline/70 bg-panel/30"
             />
           )}
         </li>

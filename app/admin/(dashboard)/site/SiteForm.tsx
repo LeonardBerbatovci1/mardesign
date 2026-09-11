@@ -47,12 +47,6 @@ export function SiteForm({ initial }: { initial: Site }) {
             {(link, update) => <LinkRow link={link} update={update} />}
           </Repeatable>
         </div>
-        <div>
-          <span className="admin-label">Extra items (shown after the “+”)</span>
-          <Repeatable items={v.secondaryNav} onChange={(n) => set(["secondaryNav"], n)} addLabel="Add extra item" makeNew={newLink}>
-            {(link, update) => <LinkRow link={link} update={update} />}
-          </Repeatable>
-        </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <TextField label="CTA button text" value={v.cta.label} onChange={(x) => set(["cta", "label"], x)} />
           <TextField label="CTA button link" value={v.cta.href} onChange={(x) => set(["cta", "href"], x)} />

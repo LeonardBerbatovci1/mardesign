@@ -72,7 +72,7 @@ export default async function ProjectPage({ params }: Params) {
           projectJsonLd(site, category, p),
         ]}
       />
-      <Nav primary={site.primaryNav} secondary={site.secondaryNav} />
+      <Nav primary={site.primaryNav} />
 
       <main
         id="main"

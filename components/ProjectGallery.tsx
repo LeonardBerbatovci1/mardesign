@@ -22,7 +22,7 @@ export function ProjectGallery({
   const empties = Math.max(0, placeholders - projects.length);
 
   return (
-    <section className="mt-16 lg:mt-20">
+    <section className="mt-10 lg:mt-12">
       <div className="flex items-center gap-6">
         <h2 className="display-title shrink-0 text-[clamp(1.1rem,1.9vw,1.6rem)] text-white">
           {title}

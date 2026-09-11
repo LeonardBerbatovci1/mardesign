@@ -35,18 +35,20 @@ export default async function WorkPage() {
           ...work.categories.map((c) => serviceJsonLd(site, c)),
         ]}
       />
-      <Nav primary={site.primaryNav} secondary={site.secondaryNav} />
+      <Nav primary={site.primaryNav} />
 
       <main
         id="main"
         className="mx-auto w-full max-w-[1500px] px-6 pt-8 sm:px-10 lg:px-16"
       >
-        <PageTopBar
-          crumbs={[{ label: "Home", href: "/" }, { label: "Work" }]}
-          script={site.script}
-        />
+        <PageTopBar crumbs={[{ label: "Home", href: "/" }, { label: "Work" }]} />
 
-        <PageTitle title={work.title} subtitle={work.subtitle} className="mt-3" />
+        <PageTitle
+          title={work.title}
+          subtitle={work.subtitle}
+          script={site.script}
+          className="mt-3"
+        />
 
         <ul className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-20 lg:grid-cols-5">
           {work.categories.map((category) => (

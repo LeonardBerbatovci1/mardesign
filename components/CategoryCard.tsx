@@ -17,14 +17,14 @@ export function CategoryCard({ category }: { category: Category }) {
         {category.cardDescription}
       </p>
 
-      <div className="relative my-8 grid flex-1 place-items-center">
+      <div className="relative mb-6 mt-5 grid flex-1 place-items-center">
         <Image
           src={category.illustration.src}
           alt=""
           width={category.illustration.width}
           height={category.illustration.height}
-          sizes="(max-width: 768px) 60vw, 260px"
-          className="max-h-[240px] w-auto object-contain transition-transform duration-500 group-hover:scale-[1.06]"
+          sizes="(max-width: 768px) 75vw, 340px"
+          className="max-h-[330px] w-full max-w-[260px] object-contain transition-transform duration-500 group-hover:scale-[1.06]"
         />
       </div>
 

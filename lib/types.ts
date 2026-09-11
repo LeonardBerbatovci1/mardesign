@@ -53,7 +53,6 @@ export type Site = {
   /** Canonical site origin, e.g. https://mardesign-ks.com (no trailing slash). */
   url: string;
   primaryNav: NavLink[];
-  secondaryNav: NavLink[];
   cta: NavLink;
   social: { platform: SocialPlatform; href: string }[];
   contact: {
@@ -73,6 +72,10 @@ export type Home = {
     body: string;
     cta: NavLink;
     image: ImageRef;
+    /** Mirrored reflection under the display base. */
+    reflection?: string;
+    /** Where clicking the display shot leads. */
+    shelfHref: string;
     badges: ImageRef[];
   };
 };
@@ -170,6 +173,7 @@ export type Theme = {
     accentSoft: string;
     neon: string;
     hairline: string;
+    outline: string;
   };
 };
 

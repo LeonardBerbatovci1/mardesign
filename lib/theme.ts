@@ -13,6 +13,7 @@ export const THEME_FIELDS: {
   { key: "accentSoft", label: "Soft accent", hint: "Subheadings and muted labels" },
   { key: "neon", label: "Neon", hint: "Glow and hairline details" },
   { key: "hairline", label: "Borders", hint: "Card and divider outlines" },
+  { key: "outline", label: "Shelf outline", hint: "Animated outline around the hero display" },
 ];
 
 /**
@@ -29,5 +30,6 @@ export function themeToCssVars(theme: Theme): Record<string, string> {
     "--color-accent-soft": c.accentSoft,
     "--color-neon": c.neon,
     "--color-hairline": c.hairline,
+    "--color-outline": c.outline,
   };
 }

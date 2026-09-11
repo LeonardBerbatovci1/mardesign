@@ -31,7 +31,7 @@ export default async function ContactPage() {
           { name: "Contact", path: "/contact" },
         ])}
       />
-      <Nav primary={site.primaryNav} secondary={site.secondaryNav} />
+      <Nav primary={site.primaryNav} />
 
       <main
         id="main"

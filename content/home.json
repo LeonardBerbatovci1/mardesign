@@ -11,6 +11,8 @@
       "width": 860,
       "height": 1290
     },
+    "reflection": "/images/hero/display-reflection.png",
+    "shelfHref": "/work/displays",
     "badges": [
       { "src": "/images/hero/badge-award.png", "alt": "Zgjedhur rafti më i bukur në Ballkan", "width": 380, "height": 376 },
       { "src": "/images/hero/badge-exclusive.png", "alt": "Ekskluzivisht për Ballkanin", "width": 380, "height": 384 }

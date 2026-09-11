@@ -50,7 +50,7 @@ export default async function CategoryPage({ params }: Params) {
           serviceJsonLd(site, category),
         ]}
       />
-      <Nav primary={site.primaryNav} secondary={site.secondaryNav} />
+      <Nav primary={site.primaryNav} />
 
       <main
         id="main"
@@ -65,7 +65,7 @@ export default async function CategoryPage({ params }: Params) {
           script={site.script}
         />
 
-        <div className="relative mt-3 lg:min-h-[420px]">
+        <div className="relative mt-3 lg:min-h-[340px]">
           <PageTitle
             title={category.title}
             subtitle="solutions that stand out."
@@ -84,7 +84,7 @@ export default async function CategoryPage({ params }: Params) {
             height={category.illustration.height}
             priority
             sizes="(max-width: 1024px) 60vw, 420px"
-            className="mx-auto mt-10 h-auto max-h-[240px] w-auto object-contain sm:max-h-[300px] lg:absolute lg:right-0 lg:top-0 lg:mt-0 lg:max-h-[380px] lg:max-w-[min(30vw,420px)]"
+            className="mx-auto mt-10 h-auto max-h-[240px] w-auto object-contain sm:max-h-[300px] lg:absolute lg:right-0 lg:top-0 lg:mt-0 lg:max-h-[340px] lg:max-w-[min(30vw,420px)]"
           />
         </div>
 

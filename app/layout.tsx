@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Caveat_Brush, Nunito, Outfit } from "next/font/google";
+import { Caveat_Brush } from "next/font/google";
+import localFont from "next/font/local";
 
 import { Analytics } from "@/components/Analytics";
 import { JsonLd } from "@/components/JsonLd";
@@ -13,18 +14,23 @@ import { themeToCssVars } from "@/lib/theme";
 
 import "./globals.css";
 
-const nunito = Nunito({
-  subsets: ["latin"],
-  variable: "--font-nunito",
-  weight: ["400", "700", "800", "900", "1000"],
+/**
+ * Panton is the brand face (see the design deck). The licensed free release
+ * ships two weights — Light and Black — as "Caps" cuts, so each file is mapped
+ * across the weight range the site actually asks for: Light covers 300-500,
+ * Black covers 600-900. That way `font-light` and `font-bold` both resolve to
+ * real artwork instead of a synthesised weight.
+ */
+const panton = localFont({
+  src: [
+    { path: "../public/fonts/panton-light.woff2", weight: "300 500", style: "normal" },
+    { path: "../public/fonts/panton-light-italic.woff2", weight: "300 500", style: "italic" },
+    { path: "../public/fonts/panton-black.woff2", weight: "600 900", style: "normal" },
+    { path: "../public/fonts/panton-black-italic.woff2", weight: "600 900", style: "italic" },
+  ],
+  variable: "--font-panton",
   display: "swap",
-});
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
+  fallback: ["ui-sans-serif", "system-ui", "sans-serif"],
 });
 
 const caveatBrush = Caveat_Brush({
@@ -105,7 +111,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${nunito.variable} ${outfit.variable} ${caveatBrush.variable}`}
+      className={`${panton.variable} ${caveatBrush.variable}`}
       style={themeToCssVars(theme) as React.CSSProperties}
     >
       <body className="min-h-dvh">

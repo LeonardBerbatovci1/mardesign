@@ -30,7 +30,6 @@ export const siteSchema = z.object({
   script: nonEmpty,
   url: z.string().trim().url(),
   primaryNav: z.array(navLink).min(1),
-  secondaryNav: z.array(navLink),
   cta: navLink,
   social: z.array(
     z.object({
@@ -72,6 +71,8 @@ export const homeSchema = z.object({
     body: nonEmpty,
     cta: navLink,
     image: imageRef,
+    reflection: nonEmpty.optional(),
+    shelfHref: nonEmpty,
     badges: z.array(imageRef),
   }),
 });
@@ -164,6 +165,7 @@ export const themeSchema = z.object({
     accentSoft: hex,
     neon: hex,
     hairline: hex,
+    outline: hex,
   }),
 });
 

@@ -37,11 +37,11 @@ export function LogoLockup({
       className={`group inline-flex flex-col items-center ${className}`}
       aria-label={`${wordmark} — home`}
     >
-      <LogoMark className="w-[clamp(1.7rem,2.5vw,2.35rem)] text-accent transition-colors group-hover:text-accent-soft" />
-      <span className="mt-1.5 font-display text-[clamp(0.95rem,1.75vw,1.55rem)] font-extrabold leading-none tracking-[-0.01em] text-white">
+      <LogoMark className="w-[clamp(2.4rem,3.6vw,3.4rem)] text-accent transition-colors group-hover:text-accent-soft" />
+      <span className="mt-2 font-display text-[clamp(1.35rem,2.5vw,2.2rem)] font-extrabold leading-none tracking-[-0.01em] text-white">
         {wordmark}
       </span>
-      <span className="mt-0.5 text-[clamp(0.36rem,0.48vw,0.44rem)] font-light uppercase tracking-[0.42em] text-accent">
+      <span className="mt-1 text-[clamp(0.5rem,0.68vw,0.63rem)] font-light uppercase tracking-[0.42em] text-accent">
         {tagline}
       </span>
     </Link>

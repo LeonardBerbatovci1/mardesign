@@ -10,3 +10,6 @@ next-env.d.ts
 
 # CMS content + uploads (never committed; lives outside the app in prod)
 /data/
+
+# Client feedback drop (source PDFs, EPS, raw fonts) — not part of the app
+/client-changes/

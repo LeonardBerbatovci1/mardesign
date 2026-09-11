@@ -11,8 +11,8 @@
   --color-hairline: #4e8b93; /* card borders */
 
   /* ── Type ───────────────────────────────────────────────────────── */
-  --font-display: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-panton), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-panton), ui-sans-serif, system-ui, sans-serif;
   --font-script: var(--font-caveat-brush), ui-rounded, cursive;
 }
 
@@ -90,9 +90,29 @@
     line-height: 1;
   }
 
+  /* Panel outlines read thin against the dark ground, so they are drawn at
+     2px with a stronger hairline — matches the presentation artwork. */
+  /* A bright dash that travels once around the hero shelf outline. The path
+     is ~1300 units long; the dash is a short segment of that, chased by the
+     gap so only one light runs at a time. */
+  .hero-outline-run {
+    stroke-dasharray: 150 1150;
+    animation: outline-run 6s linear infinite;
+    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-outline) 70%, transparent));
+  }
+
+  @keyframes outline-run {
+    from {
+      stroke-dashoffset: 1300;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
   .panel {
     background: color-mix(in srgb, var(--color-panel) 78%, transparent);
-    border: 1px solid color-mix(in srgb, var(--color-hairline) 70%, transparent);
+    border: 2px solid color-mix(in srgb, var(--color-hairline) 85%, transparent);
     backdrop-filter: blur(2px);
   }
 }

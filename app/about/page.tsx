@@ -35,7 +35,7 @@ export default async function AboutPage() {
           { name: "About", path: "/about" },
         ])}
       />
-      <Nav primary={site.primaryNav} secondary={site.secondaryNav} />
+      <Nav primary={site.primaryNav} />
 
       <main
         id="main"
@@ -46,7 +46,7 @@ export default async function AboutPage() {
           script={site.script}
         />
 
-        <div className="mt-3 grid grid-cols-1 items-start gap-10 lg:grid-cols-[1fr_1.15fr]">
+        <div className="mt-3 grid grid-cols-1 items-start gap-10 lg:grid-cols-[0.85fr_1.3fr]">
           <div>
             <PageTitle title={about.title} />
 
@@ -54,7 +54,7 @@ export default async function AboutPage() {
               {about.subtitle}
             </p>
 
-            <p className="mt-6 max-w-[48ch] text-[clamp(1rem,1.35vw,1.2rem)] font-light leading-relaxed text-white/90">
+            <p className="mt-6 max-w-[34ch] text-[clamp(1rem,1.35vw,1.2rem)] font-light leading-relaxed text-white/90">
               {about.body}
             </p>
 
@@ -73,7 +73,7 @@ export default async function AboutPage() {
             height={about.image.height}
             priority
             sizes="(max-width: 1024px) 92vw, 780px"
-            className="h-auto w-full lg:mt-6"
+            className="h-auto w-full lg:mt-2"
           />
         </div>
 
