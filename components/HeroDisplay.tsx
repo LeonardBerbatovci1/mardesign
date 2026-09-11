@@ -74,7 +74,7 @@ function ShelfOutline({ className = "" }: { className?: string }) {
       {/* The traced ring is 260x354; map it onto the cabinet body, which
           spans x 5-94%% and y 2-80%% of the 860x1290 frame (the rest of the
           frame is the shot's own reflection). */}
-      <g transform="translate(43 26) scale(2.9435 2.8417)">
+      <g transform="translate(43 26) scale(2.9435 3.0)">
         <path
           d={d}
           stroke="var(--color-outline)"
