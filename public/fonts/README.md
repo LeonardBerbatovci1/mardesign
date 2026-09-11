@@ -11,7 +11,13 @@ to WOFF2 for the web.
 | `panton-black-italic.woff2` | Panton-BlackitalicCaps.otf | 600–900 (italic) |
 
 Wired up in `app/layout.tsx` via `next/font/local` as `--font-panton`, which
-`app/globals.css` uses for both `--font-display` and `--font-sans`.
+`app/globals.css` uses for `--font-display` (the big all-caps titles).
+
+Body text uses **Montserrat** (`--font-sans`, from Google Fonts) instead. The
+free Panton release is "Caps" only: its lowercase glyphs are drawn as small
+capitals — `a` and `A` share one outline — so running text set in it comes out
+shouting. Montserrat carries real lowercase and is the face the brand artwork
+itself pairs with Panton (see `%%DocumentFonts` in the deck's EPS files).
 
 ## Licence
 

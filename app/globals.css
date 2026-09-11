@@ -12,7 +12,7 @@
 
   /* ── Type ───────────────────────────────────────────────────────── */
   --font-display: var(--font-panton), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-panton), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --font-script: var(--font-caveat-brush), ui-rounded, cursive;
 }
 

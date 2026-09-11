@@ -17,9 +17,9 @@ export function PageTopBar({
   script?: string;
 }) {
   return (
-    <div className="flex flex-col-reverse items-start justify-between gap-2 sm:flex-row sm:items-start sm:gap-8">
+    <div className="flex flex-col-reverse items-start justify-between gap-2 sm:flex-row sm:items-baseline sm:gap-8">
       <Breadcrumb items={crumbs} />
-      {script && <ScriptMark className="sm:pt-1 sm:text-right">{script}</ScriptMark>}
+      {script && <ScriptMark className="sm:text-right">{script}</ScriptMark>}
     </div>
   );
 }

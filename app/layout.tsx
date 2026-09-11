@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Caveat_Brush } from "next/font/google";
+import { Caveat_Brush, Montserrat } from "next/font/google";
 import localFont from "next/font/local";
 
 import { Analytics } from "@/components/Analytics";
@@ -31,6 +31,19 @@ const panton = localFont({
   variable: "--font-panton",
   display: "swap",
   fallback: ["ui-sans-serif", "system-ui", "sans-serif"],
+});
+
+/**
+ * Body face. The licensed Panton release is "Caps" only — its lowercase
+ * glyphs are drawn as small capitals, so running text set in it comes out
+ * shouting. Montserrat carries the lowercase, and is the face the brand
+ * artwork itself pairs with Panton (see the deck's source files).
+ */
+const montserrat = Montserrat({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-montserrat",
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 const caveatBrush = Caveat_Brush({
@@ -111,7 +124,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${panton.variable} ${caveatBrush.variable}`}
+      className={`${panton.variable} ${montserrat.variable} ${caveatBrush.variable}`}
       style={themeToCssVars(theme) as React.CSSProperties}
     >
       <body className="min-h-dvh">
