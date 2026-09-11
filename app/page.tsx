@@ -42,20 +42,20 @@ export default async function HomePage() {
       </div>
 
       <main id="main">
-        <section className="mx-auto grid w-full max-w-[1700px] grid-cols-1 items-center gap-10 px-6 pb-10 pt-10 sm:px-10 lg:grid-cols-[1.12fr_1.1fr] lg:gap-8 lg:px-16 lg:pb-12 lg:pt-4">
+        <section className="mx-auto grid w-full max-w-[1700px] grid-cols-1 items-center gap-10 px-6 pb-6 pt-10 sm:px-10 lg:grid-cols-[1.12fr_1.1fr] lg:gap-8 lg:px-16 lg:pb-4 lg:pt-4">
           <div className="min-w-0">
-            <p className="text-[clamp(0.95rem,1.6vw,1.4rem)] font-light uppercase tracking-[0.06em] text-accent">
+            <p className="text-[clamp(0.8rem,1.6vw,1.4rem)] font-light uppercase tracking-[0.06em] text-accent">
               {hero.eyebrow}
             </p>
 
-            <h1 className="display-title mt-3 max-w-full text-[clamp(1.7rem,4vw,3.15rem)] lg:max-w-[25ch] text-white">
+            <h1 className="display-title mt-3 max-w-full text-[clamp(1.45rem,6.2vw,3.15rem)] lg:max-w-[25ch] text-white">
               {hero.title}
             </h1>
-            <p className="display-title mt-1 max-w-full text-[clamp(1.7rem,4vw,3.15rem)] lg:max-w-[25ch] text-accent">
+            <p className="display-title mt-1 max-w-full text-[clamp(1.45rem,6.2vw,3.15rem)] lg:max-w-[25ch] text-accent">
               {hero.titleAccent}
             </p>
 
-            <p className="mt-6 max-w-[46ch] text-[clamp(1rem,1.35vw,1.2rem)] font-light leading-relaxed text-white/90">
+            <p className="mt-6 max-w-[46ch] text-[clamp(0.95rem,1.35vw,1.2rem)] font-light leading-relaxed text-white/90">
               {hero.body}
             </p>
 
@@ -83,7 +83,7 @@ export default async function HomePage() {
                 width={hero.badges[0].width}
                 height={hero.badges[0].height}
                 sizes="(max-width: 640px) 26vw, 190px"
-                className="pointer-events-none absolute left-0 top-[38%] w-[22%] max-w-[170px] -translate-x-[45%] lg:-translate-x-[52%]"
+                className="pointer-events-none absolute left-0 top-[38%] w-[22%] max-w-[170px] lg:-translate-x-[52%]"
               />
             )}
 
@@ -94,7 +94,7 @@ export default async function HomePage() {
                 width={hero.badges[1].width}
                 height={hero.badges[1].height}
                 sizes="(max-width: 640px) 26vw, 190px"
-                className="pointer-events-none absolute bottom-[26%] right-0 w-[22%] max-w-[170px] translate-x-[38%] lg:translate-x-[42%]"
+                className="pointer-events-none absolute bottom-[26%] right-0 w-[22%] max-w-[170px] lg:translate-x-[42%]"
               />
             )}
           </HeroDisplay>

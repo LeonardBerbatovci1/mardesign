@@ -28,13 +28,13 @@ export function HeroDisplay({
   children?: React.ReactNode;
 }) {
   return (
-    <div className="relative mx-auto w-fit max-w-full min-w-0">
+    <div className="relative mx-auto w-full max-w-full min-w-0 lg:w-fit">
       <Link
         href={href}
         aria-label={label}
         className="group relative block rounded-2xl focus-visible:outline-none"
       >
-        <div className="relative mx-auto w-fit">
+        <div className="relative mx-auto -mb-[16%] w-full max-w-[min(88vw,600px)] lg:w-fit lg:max-w-none">
           <Image
             src={image.src}
             alt={image.alt ?? ""}
@@ -42,7 +42,7 @@ export function HeroDisplay({
             height={image.height}
             priority
             sizes="(max-width: 1024px) 90vw, 680px"
-            className="mx-auto h-auto w-full max-w-[min(88vw,600px)] transition-transform duration-500 [mask-image:linear-gradient(to_bottom,black_72%,transparent_97%)] group-hover:scale-[1.015] lg:max-h-[74dvh] lg:w-auto lg:max-w-none"
+            className="mx-auto h-auto w-full max-w-[min(88vw,600px)] transition-transform duration-500 [mask-image:linear-gradient(to_bottom,black_72%,transparent_97%)] group-hover:scale-[1.015] lg:max-h-[78dvh] lg:w-auto lg:max-w-none"
           />
 
           {/* Travelling outline, sized to the shelf body inside the shot. */}
