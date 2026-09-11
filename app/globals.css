@@ -146,17 +146,17 @@
   /* Panel outlines read thin against the dark ground, so they are drawn at
      2px with a stronger hairline — matches the presentation artwork. */
   /* A bright dash that travels once around the hero shelf outline. The traced
-     path is ~3285 units long; the dash is a fifth of that, chased by the gap
+     path is ~3296 units long; the dash is a fifth of that, chased by the gap
      so only one light runs at a time. */
   .hero-outline-run {
-    stroke-dasharray: 660 2625;
+    stroke-dasharray: 660 2636;
     animation: outline-run 6s linear infinite;
     filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-outline) 85%, transparent));
   }
 
   @keyframes outline-run {
     from {
-      stroke-dashoffset: 3285;
+      stroke-dashoffset: 3296;
     }
     to {
       stroke-dashoffset: 0;
