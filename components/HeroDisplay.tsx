@@ -61,7 +61,7 @@ export function HeroDisplay({
  */
 function ShelfOutline({ className = "" }: { className?: string }) {
   const d =
-    "M 171.91,354.08 L 171.36,353.98 L 0.00,322.08 L 0.74,275.13 L 7.39,264.72 L 9.08,117.20 L 6.50,112.75 L 6.50,112.17 L 7.11,33.51 L 8.82,33.19 L 182.35,0.00 L 256.40,35.70 L 256.48,48.97 C 257.60,52.66 259.74,61.40 257.77,69.44 L 257.74,69.58 C 257.39,70.90 257.07,72.03 256.78,72.96 L 257.38,153.69 L 256.14,158.01 L 256.46,264.31 L 259.74,270.01 L 260.03,324.03 L 171.91,354.08 Z";
+    "M 262,102 L 61,142 L 60,362 L 68,378 L 62,862 L 41,898 L 39,998 L 71,1019 L 286,1059 L 322,1072 L 430,1093 L 465,1092 L 537,1105 L 573,1103 L 788,1030 L 808,998 L 808,890 L 798,838 L 798,238 L 804,194 L 797,142 L 716,102 Z";
 
   return (
     <svg
@@ -71,10 +71,11 @@ function ShelfOutline({ className = "" }: { className?: string }) {
       className={className}
       preserveAspectRatio="none"
     >
-      {/* The traced ring is 260x354; map it onto the cabinet body, which
-          spans x 5-94%% and y 2-80%% of the 860x1290 frame (the rest of the
-          frame is the shot's own reflection). */}
-      <g transform="translate(43 26) scale(2.9435 3.0)">
+      {/* Traced from the artwork's own alpha channel, so the line follows the
+          cabinet in perspective: the header panel, the left edge, the plinth's
+          contact line where it meets its reflection, and the razor side.
+          Coordinates are the shot's own 860x1290 frame. */}
+      <g>
         <path
           d={d}
           stroke="var(--color-outline)"
