@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { CategoryCard } from "@/components/CategoryCard";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { Nav } from "@/components/Nav";
+import { SiteHeader } from "@/components/SiteHeader";
 import { PageTitle, PageTopBar } from "@/components/PageHeader";
 import { getSite, getWork } from "@/lib/content";
 import { breadcrumbJsonLd, pageMetadata, serviceJsonLd } from "@/lib/seo";
@@ -35,7 +35,7 @@ export default async function WorkPage() {
           ...work.categories.map((c) => serviceJsonLd(site, c)),
         ]}
       />
-      <Nav primary={site.primaryNav} />
+      <SiteHeader site={site} />
 
       <main
         id="main"

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { ContactCard } from "@/components/ContactCard";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { Nav } from "@/components/Nav";
+import { SiteHeader } from "@/components/SiteHeader";
 import { PageTitle, PageTopBar } from "@/components/PageHeader";
 import { getContact, getSite } from "@/lib/content";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
@@ -31,7 +31,7 @@ export default async function ContactPage() {
           { name: "Contact", path: "/contact" },
         ])}
       />
-      <Nav primary={site.primaryNav} />
+      <SiteHeader site={site} />
 
       <main
         id="main"

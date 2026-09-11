@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { Nav } from "@/components/Nav";
+import { SiteHeader } from "@/components/SiteHeader";
 import { PageTitle, PageTopBar } from "@/components/PageHeader";
 import { ProjectGallery } from "@/components/ProjectGallery";
 import { getCategories, getCategory, getSite } from "@/lib/content";
@@ -50,7 +50,7 @@ export default async function CategoryPage({ params }: Params) {
           serviceJsonLd(site, category),
         ]}
       />
-      <Nav primary={site.primaryNav} />
+      <SiteHeader site={site} />
 
       <main
         id="main"

@@ -8,9 +8,12 @@ import { Social } from "@/components/Social";
 import type { NavLink, SocialPlatform } from "@/lib/types";
 
 /**
- * Home-page header nav. On desktop the links sit inline next to the "Start a
- * project" pill; below `lg` they collapse behind a hamburger that opens a
- * full-screen overlay (the home page has no floating pill nav to fall back on).
+ * The header nav used on every page. On desktop the links sit inline next to
+ * the "Start a project" pill; below `lg` they collapse behind a hamburger that
+ * opens a full-screen overlay.
+ *
+ * The link for the page you are on is marked, so the masthead still tells you
+ * where you are now that inner pages share the home header.
  */
 export function HomeNav({
   links,
@@ -25,6 +28,9 @@ export function HomeNav({
   const pathname = usePathname();
 
   useEffect(() => setOpen(false), [pathname]);
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -41,7 +47,10 @@ export function HomeNav({
             <li key={link.href + link.label}>
               <Link
                 href={link.href}
-                className="text-sm font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:text-accent"
+                aria-current={isActive(link.href) ? "page" : undefined}
+                className={`text-sm font-semibold uppercase tracking-[0.12em] transition-colors hover:text-accent ${
+                  isActive(link.href) ? "text-accent" : "text-white"
+                }`}
               >
                 {link.label}
               </Link>
@@ -95,7 +104,10 @@ export function HomeNav({
                 <li key={link.href + link.label}>
                   <Link
                     href={link.href}
-                    className="block py-3 font-display text-2xl font-extrabold uppercase tracking-tight text-white"
+                    aria-current={isActive(link.href) ? "page" : undefined}
+                    className={`block py-3 font-display text-2xl font-extrabold uppercase tracking-tight ${
+                      isActive(link.href) ? "text-accent" : "text-white"
+                    }`}
                   >
                     {link.label}
                   </Link>

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { Nav } from "@/components/Nav";
+import { SiteHeader } from "@/components/SiteHeader";
 import { PageTitle, PageTopBar } from "@/components/PageHeader";
 import { Timeline } from "@/components/Timeline";
 import { getAbout, getSite } from "@/lib/content";
@@ -35,7 +35,7 @@ export default async function AboutPage() {
           { name: "About", path: "/about" },
         ])}
       />
-      <Nav primary={site.primaryNav} />
+      <SiteHeader site={site} />
 
       <main
         id="main"

@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { Nav } from "@/components/Nav";
+import { SiteHeader } from "@/components/SiteHeader";
 import { PageTitle, PageTopBar } from "@/components/PageHeader";
 import { getProject, getSite, getWork } from "@/lib/content";
 import { breadcrumbJsonLd, pageMetadata, projectJsonLd } from "@/lib/seo";
@@ -72,7 +72,7 @@ export default async function ProjectPage({ params }: Params) {
           projectJsonLd(site, category, p),
         ]}
       />
-      <Nav primary={site.primaryNav} />
+      <SiteHeader site={site} />
 
       <main
         id="main"

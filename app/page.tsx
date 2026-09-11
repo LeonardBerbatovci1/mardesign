@@ -4,8 +4,7 @@ import Link from "next/link";
 
 import { Footer } from "@/components/Footer";
 import { HeroDisplay } from "@/components/HeroDisplay";
-import { HomeNav } from "@/components/HomeNav";
-import { LogoLockup } from "@/components/Logo";
+import { SiteHeader } from "@/components/SiteHeader";
 import { Social } from "@/components/Social";
 import { getHome, getSite } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
@@ -24,22 +23,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <div className="mx-auto w-full max-w-[1700px] px-6 pt-8 sm:px-10 lg:px-16">
-        <div className="flex items-start justify-between gap-6">
-          <LogoLockup
-            wordmark={site.wordmark}
-            tagline={site.tagline}
-            className="items-start !items-start text-left"
-          />
-          <div className="pt-1 sm:pt-4">
-            <HomeNav
-              links={[...site.primaryNav]}
-              cta={site.cta}
-              social={site.social}
-            />
-          </div>
-        </div>
-      </div>
+      <SiteHeader site={site} />
 
       <main id="main">
         <section className="mx-auto grid w-full max-w-[1700px] grid-cols-1 items-center gap-10 px-6 pb-6 pt-10 sm:px-10 lg:grid-cols-[1.12fr_1.1fr] lg:gap-8 lg:px-16 lg:pb-4 lg:pt-4">
