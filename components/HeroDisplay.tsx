@@ -61,7 +61,7 @@ export function HeroDisplay({
  */
 function ShelfOutline({ className = "" }: { className?: string }) {
   const d =
-    "M 62,141 L 536,50 L 608,50 L 794,140 L 797,150 L 804,198 L 798,240 L 798,834 L 799,864 L 808,888 L 808,996 L 780,1034 L 520,1107 L 80,1022 L 39,996 L 41,900 L 62,858 L 68,378 L 60,360 L 61,150 Z";
+    "M 60,135 L 536,50 L 608,50 L 794,140 L 797,150 L 804,198 L 798,240 L 798,834 L 799,864 L 808,888 L 808,996 L 780,1034 L 520,1107 L 80,1022 L 40,986 L 39,900 L 61,855 L 68,378 L 60,360 L 60,145 Z";
 
   return (
     <svg
@@ -74,7 +74,9 @@ function ShelfOutline({ className = "" }: { className?: string }) {
       {/* Traced from the artwork itself, in the shot's own 860x1290 frame, so
           the line sits on the cabinet in perspective: up the slanted header
           panel and over the razor head, down both sides, and across the foot
-          of the plinth where it meets its reflection. */}
+          of the plinth where it meets its reflection. The left corners sit on
+          the solid body (60,135 at the header, 39,900 at the plinth flare),
+          not on the soft glow that spreads a further 6px past it. */}
       <g>
         <path
           d={d}
