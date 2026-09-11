@@ -46,7 +46,7 @@ export default async function AboutPage() {
           script={site.script}
         />
 
-        <div className="mt-3 grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.8fr_1.45fr] lg:gap-12">
+        <div className="mt-3 grid grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-12">
           <div>
             <PageTitle title={about.title} />
 
@@ -54,7 +54,7 @@ export default async function AboutPage() {
               {about.subtitle}
             </p>
 
-            <p className="mt-6 max-w-[34ch] text-[clamp(1rem,1.35vw,1.2rem)] font-light leading-relaxed text-white/90">
+            <p className="mt-6 max-w-[44ch] text-[clamp(1rem,1.35vw,1.2rem)] font-light leading-relaxed text-white/90">
               {about.body}
             </p>
 
@@ -77,7 +77,7 @@ export default async function AboutPage() {
           />
         </div>
 
-        <section className="mt-12 border-t border-hairline/40 pt-12">
+        <section className="mt-6 border-t border-hairline/40 pt-12">
           <h2 className="display-title text-[clamp(1.9rem,4vw,3rem)] text-white">
             {about.story.title}
           </h2>
