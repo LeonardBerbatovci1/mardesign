@@ -12,7 +12,7 @@ export function Timeline({ milestones }: { milestones: Milestone[] }) {
   return (
     <ol className="mt-10 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
       {milestones.map((milestone) => (
-        <li key={milestone.year} className="relative pt-8">
+        <li key={milestone.year} className="relative flex flex-col pt-8">
           <span
             aria-hidden="true"
             className="absolute left-0 top-0 size-5 rounded-full border-2 border-accent"
@@ -32,21 +32,23 @@ export function Timeline({ milestones }: { milestones: Milestone[] }) {
             {milestone.body}
           </p>
 
-          {milestone.image ? (
-            <Image
-              src={milestone.image}
-              alt={`${milestone.year} — ${milestone.title}`}
-              width={600}
-              height={420}
-              sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 22vw"
-              className="mt-5 aspect-[4/3] w-full rounded-lg object-cover"
-            />
-          ) : (
-            <div
-              aria-hidden="true"
-              className="mt-5 aspect-[4/3] w-full rounded-lg border-2 border-dashed border-hairline/70 bg-panel/30"
-            />
-          )}
+          <div className="mt-auto pt-5">
+            {milestone.image ? (
+              <Image
+                src={milestone.image}
+                alt={`${milestone.year} — ${milestone.title}`}
+                width={600}
+                height={420}
+                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 22vw"
+                className="aspect-[4/3] w-full rounded-lg object-cover"
+              />
+            ) : (
+              <div
+                aria-hidden="true"
+                className="aspect-[4/3] w-full rounded-lg border-2 border-dashed border-hairline/70 bg-panel/30"
+              />
+            )}
+          </div>
         </li>
       ))}
     </ol>

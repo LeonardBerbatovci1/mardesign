@@ -46,7 +46,7 @@ export default async function AboutPage() {
           script={site.script}
         />
 
-        <div className="mt-3 grid grid-cols-1 items-start gap-10 lg:grid-cols-[0.85fr_1.3fr]">
+        <div className="mt-3 grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.8fr_1.45fr] lg:gap-12">
           <div>
             <PageTitle title={about.title} />
 
@@ -73,11 +73,11 @@ export default async function AboutPage() {
             height={about.image.height}
             priority
             sizes="(max-width: 1024px) 92vw, 780px"
-            className="h-auto w-full lg:mt-2"
+            className="h-auto w-full"
           />
         </div>
 
-        <section className="mt-20 border-t border-hairline/40 pt-14">
+        <section className="mt-12 border-t border-hairline/40 pt-12">
           <h2 className="display-title text-[clamp(1.9rem,4vw,3rem)] text-white">
             {about.story.title}
           </h2>
