@@ -90,6 +90,59 @@
     line-height: 1;
   }
 
+  /* Between-pages curtain: snap to the dark ground carrying the logo icon,
+     hold, then ease the new page back in. Timings match the client's
+     reference clip (see components/PageTransition.tsx). */
+  .page-curtain {
+    opacity: 0;
+  }
+
+  .page-curtain[data-phase="covering"] {
+    animation: curtain-cover 110ms ease-out forwards;
+  }
+
+  .page-curtain[data-phase="revealing"] {
+    animation: curtain-reveal 420ms ease-in forwards;
+  }
+
+  .page-curtain svg {
+    animation: curtain-mark 680ms ease-out both;
+  }
+
+  @keyframes curtain-cover {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes curtain-reveal {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes curtain-mark {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    25%,
+    55% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.04);
+    }
+  }
+
   /* Panel outlines read thin against the dark ground, so they are drawn at
      2px with a stronger hairline — matches the presentation artwork. */
   /* A bright dash that travels once around the hero shelf outline. The path
@@ -120,6 +173,12 @@
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  /* The curtain is animation-driven, so with animations neutered it would
+     otherwise sit on screen at full opacity. Hide it outright instead. */
+  .page-curtain {
+    display: none !important;
   }
   *,
   *::before,

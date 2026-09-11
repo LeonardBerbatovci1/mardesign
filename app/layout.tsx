@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 
 import { Analytics } from "@/components/Analytics";
 import { JsonLd } from "@/components/JsonLd";
+import { PageTransition } from "@/components/PageTransition";
 import { getSite, getTheme } from "@/lib/content";
 import {
   organizationJsonLd,
@@ -136,6 +137,7 @@ export default async function RootLayout({
           Skip to content
         </a>
         {children}
+        <PageTransition />
         <Analytics />
       </body>
     </html>
