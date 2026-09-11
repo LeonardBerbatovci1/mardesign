@@ -27,9 +27,9 @@ export function PageTopBar({
 /**
  * The oversized page title plus its mint subtitle.
  *
- * When `script` is passed the handwritten mark shares the title's row and
- * sits on its baseline, so "we design, we finalise" lines up with the bottom
- * of "OUR WORK" rather than floating above it.
+ * When `script` is passed, the handwritten mark sits on the baseline of the
+ * whole title block — level with "solutions that stand out." rather than with
+ * the big title above it, which is how the deck draws it.
  */
 export function PageTitle({
   title,
@@ -43,18 +43,20 @@ export function PageTitle({
   className?: string;
 }) {
   return (
-    <div className={className}>
-      <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
+    <div
+      className={`flex flex-wrap items-end justify-between gap-x-8 gap-y-2 ${className}`}
+    >
+      <div className="min-w-0">
         <h1 className="display-title text-[clamp(2.75rem,9vw,7rem)] text-white">
           {title}
         </h1>
-        {script && <ScriptMark className="shrink-0">{script}</ScriptMark>}
+        {subtitle && (
+          <p className="display-sub mt-2 text-[clamp(1.25rem,3.2vw,2.4rem)]">
+            {subtitle}
+          </p>
+        )}
       </div>
-      {subtitle && (
-        <p className="display-sub mt-2 text-[clamp(1.25rem,3.2vw,2.4rem)]">
-          {subtitle}
-        </p>
-      )}
+      {script && <ScriptMark className="shrink-0 pb-1">{script}</ScriptMark>}
     </div>
   );
 }
