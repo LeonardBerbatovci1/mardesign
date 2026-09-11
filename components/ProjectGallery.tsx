@@ -5,8 +5,12 @@ import type { Project } from "@/lib/types";
 
 /**
  * The strip of project cards under each category. Each card links to that
- * project's own page. When a category has no projects yet the deck still shows
- * empty frames, so we keep them — they're the slots the dashboard fills.
+ * project's own page.
+ *
+ * A category with no projects yet still shows empty frames, so the section
+ * reads as "photos go here" rather than looking broken. Once a category has
+ * photos the row is left as-is: padding a populated row out to a fixed count
+ * leaves stray empty boxes on the end, which the deck does not draw.
  */
 export function ProjectGallery({
   categorySlug,
@@ -19,10 +23,10 @@ export function ProjectGallery({
   projects: Project[];
   placeholders?: number;
 }) {
-  const empties = Math.max(0, placeholders - projects.length);
+  const empties = projects.length === 0 ? placeholders : 0;
 
   return (
-    <section className="mt-10 lg:mt-12">
+    <section className="mt-10 lg:mt-6">
       <div className="flex items-center gap-6">
         <h2 className="display-title shrink-0 text-[clamp(1.1rem,1.9vw,1.6rem)] text-white">
           {title}
