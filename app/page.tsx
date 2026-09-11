@@ -73,7 +73,6 @@ export default async function HomePage() {
               links through to the project, badges pinned to it. */}
           <HeroDisplay
             image={hero.image}
-            reflection={hero.reflection}
             href={hero.shelfHref}
             label={`${hero.title} — view this project`}
           >
@@ -84,7 +83,7 @@ export default async function HomePage() {
                 width={hero.badges[0].width}
                 height={hero.badges[0].height}
                 sizes="(max-width: 640px) 26vw, 190px"
-                className="pointer-events-none absolute left-0 top-[34%] w-[24%] max-w-[185px] -translate-x-[8%] lg:-translate-x-[45%]"
+                className="pointer-events-none absolute left-0 top-[38%] w-[22%] max-w-[170px] -translate-x-[45%] lg:-translate-x-[52%]"
               />
             )}
 
@@ -95,7 +94,7 @@ export default async function HomePage() {
                 width={hero.badges[1].width}
                 height={hero.badges[1].height}
                 sizes="(max-width: 640px) 26vw, 190px"
-                className="pointer-events-none absolute bottom-[24%] right-0 w-[24%] max-w-[185px] translate-x-[8%] lg:translate-x-[20%]"
+                className="pointer-events-none absolute bottom-[26%] right-0 w-[22%] max-w-[170px] translate-x-[38%] lg:translate-x-[42%]"
               />
             )}
           </HeroDisplay>

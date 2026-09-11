@@ -71,7 +71,6 @@ export const homeSchema = z.object({
     body: nonEmpty,
     cta: navLink,
     image: imageRef,
-    reflection: nonEmpty.optional(),
     shelfHref: nonEmpty,
     badges: z.array(imageRef),
   }),

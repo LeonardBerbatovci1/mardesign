@@ -6,26 +6,23 @@ import type { ImageRef } from "@/lib/types";
 /**
  * The home hero product shot.
  *
- * Three pieces sit on top of each other, all sharing one box so they stay
- * registered as the shot scales:
+ * The artwork already carries its own mirrored reflection below the cabinet
+ * base, so the shot is masked to fade that reflection out downward rather
+ * than letting it stop abruptly — the gradient the deck marks in blue.
  *
- *  1. the display photo,
- *  2. the mirrored reflection under its base, faded out downward,
- *  3. the brand outline traced around the shelf, with a light travelling
- *     around the path (the artwork is `out line i animuar` from the deck).
+ * Over it sits the brand outline traced around the cabinet, with a light
+ * travelling around the path (the `out line i animuar` artwork from the deck).
  *
  * The whole thing is a link: clicking the shelf opens the project it belongs
  * to, as the deck asks.
  */
 export function HeroDisplay({
   image,
-  reflection,
   href,
   label,
   children,
 }: {
   image: ImageRef;
-  reflection?: string;
   href: string;
   label: string;
   children?: React.ReactNode;
@@ -45,24 +42,12 @@ export function HeroDisplay({
             height={image.height}
             priority
             sizes="(max-width: 1024px) 90vw, 680px"
-            className="mx-auto h-auto w-full max-w-[min(88vw,600px)] transition-transform duration-500 group-hover:scale-[1.015] lg:max-h-[74dvh] lg:w-auto lg:max-w-none"
+            className="mx-auto h-auto w-full max-w-[min(88vw,600px)] transition-transform duration-500 [mask-image:linear-gradient(to_bottom,black_72%,transparent_97%)] group-hover:scale-[1.015] lg:max-h-[74dvh] lg:w-auto lg:max-w-none"
           />
 
           {/* Travelling outline, sized to the shelf body inside the shot. */}
           <ShelfOutline className="pointer-events-none absolute inset-0 h-full w-full" />
         </div>
-
-        {reflection && (
-          <Image
-            src={reflection}
-            alt=""
-            aria-hidden="true"
-            width={1326}
-            height={680}
-            sizes="(max-width: 1024px) 90vw, 680px"
-            className="pointer-events-none mx-auto -mt-[3%] h-auto w-full max-w-[min(88vw,600px)] opacity-70 [mask-image:linear-gradient(to_bottom,black,transparent_72%)] lg:w-auto lg:max-w-none"
-          />
-        )}
       </Link>
 
       {children}
@@ -86,21 +71,22 @@ function ShelfOutline({ className = "" }: { className?: string }) {
       className={className}
       preserveAspectRatio="none"
     >
-      {/* The traced artwork is 260x354; map it onto the cabinet in the shot
-          (x 39-807, y 116-1264 of the 860x1290 frame). */}
-      <g transform="translate(39 116) scale(2.953 3.243)">
+      {/* The traced ring is 260x354; map it onto the cabinet body, which
+          spans x 5-94%% and y 2-80%% of the 860x1290 frame (the rest of the
+          frame is the shot's own reflection). */}
+      <g transform="translate(43 26) scale(2.9435 2.8417)">
         <path
           d={d}
           stroke="var(--color-outline)"
-          strokeWidth="1"
+          strokeWidth="2"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          opacity="0.3"
+          opacity="0.55"
         />
         <path
           d={d}
           stroke="var(--color-outline)"
-          strokeWidth="2.5"
+          strokeWidth="4"
           strokeLinejoin="round"
           strokeLinecap="round"
           vectorEffect="non-scaling-stroke"

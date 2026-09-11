@@ -96,9 +96,9 @@
      is ~1300 units long; the dash is a short segment of that, chased by the
      gap so only one light runs at a time. */
   .hero-outline-run {
-    stroke-dasharray: 150 1150;
+    stroke-dasharray: 260 1040;
     animation: outline-run 6s linear infinite;
-    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-outline) 70%, transparent));
+    filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-outline) 85%, transparent));
   }
 
   @keyframes outline-run {

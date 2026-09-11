@@ -72,8 +72,6 @@ export type Home = {
     body: string;
     cta: NavLink;
     image: ImageRef;
-    /** Mirrored reflection under the display base. */
-    reflection?: string;
     /** Where clicking the display shot leads. */
     shelfHref: string;
     badges: ImageRef[];
