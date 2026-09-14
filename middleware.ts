@@ -9,7 +9,11 @@ import { SESSION_COOKIE, verifySessionToken } from "@/lib/session";
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  if (pathname === "/admin/login" || pathname === "/api/admin/login") {
+  if (
+    pathname === "/admin/login" ||
+    pathname === "/admin/setup" ||
+    pathname === "/api/admin/login"
+  ) {
     return NextResponse.next();
   }
 

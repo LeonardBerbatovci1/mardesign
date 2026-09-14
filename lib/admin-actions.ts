@@ -8,6 +8,7 @@ import {
   endSession,
   getSessionEmail,
   isAuthenticated,
+  needsSetup,
   startSession,
 } from "./auth";
 import { newUserSchema, updateUserSchema, SCHEMA_BY_DOC } from "./schemas";
@@ -45,6 +46,43 @@ export async function loginAction(
 
   await startSession(check.email);
   redirect(next.startsWith("/admin") ? next : "/admin");
+}
+
+/**
+ * Create the very first dashboard account, right from the browser. Only
+ * works while needsSetup() is true — re-checked here, not just on the page,
+ * since a server action can be invoked directly.
+ */
+export async function setupAction(
+  _prev: ActionResult | null,
+  formData: FormData,
+): Promise<ActionResult> {
+  if (!(await needsSetup())) {
+    return { ok: false, error: "Setup has already been completed. Go to /admin/login." };
+  }
+
+  const name = String(formData.get("name") ?? "");
+  const email = String(formData.get("email") ?? "");
+  const password = String(formData.get("password") ?? "");
+  const confirm = String(formData.get("confirm") ?? "");
+  if (password !== confirm) {
+    return { ok: false, error: "Passwords don't match." };
+  }
+
+  const parsed = newUserSchema.safeParse({ name, email, password });
+  if (!parsed.success) {
+    return { ok: false, error: parsed.error.issues[0]?.message ?? "Invalid input." };
+  }
+
+  let user;
+  try {
+    user = await createUser(parsed.data.name, parsed.data.email, parsed.data.password);
+  } catch (e) {
+    return { ok: false, error: (e as Error).message };
+  }
+
+  await startSession(user.email);
+  redirect("/admin");
 }
 
 export async function logoutAction(): Promise<void> {

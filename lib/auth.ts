@@ -62,10 +62,22 @@ export async function checkCredentials(
 
   if (!hasOwner && !(await hasAnyUsers())) {
     throw new Error(
-      "No admin account is set up yet. Set ADMIN_EMAIL and ADMIN_PASSWORD in the environment (see docs/DEPLOY-HOSTINGER.md), then add named users from the dashboard.",
+      "No admin account is set up yet. Go to /admin/setup to create one.",
     );
   }
   return { ok: false };
+}
+
+/**
+ * True when nobody can log in yet — no owner pair in the environment and no
+ * stored users. In that state /admin/login redirects to /admin/setup, which
+ * lets the first person create an account right in the browser without ever
+ * touching the hosting environment's variables.
+ */
+export async function needsSetup(): Promise<boolean> {
+  const hasOwner = Boolean(process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD);
+  if (hasOwner) return false;
+  return !(await hasAnyUsers());
 }
 
 export async function startSession(email: string): Promise<void> {
