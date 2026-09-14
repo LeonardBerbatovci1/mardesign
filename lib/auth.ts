@@ -22,10 +22,24 @@ function safeEqual(a: string, b: string): boolean {
   return out === 0;
 }
 
-export function checkPassword(input: string): boolean {
-  const expected = process.env.ADMIN_PASSWORD;
-  if (!expected) throw new Error("ADMIN_PASSWORD is not set.");
-  return safeEqual(input, expected);
+function normalizeEmail(input: string): string {
+  return input.trim().toLowerCase();
+}
+
+/**
+ * Check an email + password pair against the single admin account configured
+ * in the environment. Both must match — the caller shows one generic error
+ * either way, so a wrong guess never reveals which field was incorrect.
+ */
+export function checkCredentials(email: string, password: string): boolean {
+  const expectedEmail = process.env.ADMIN_EMAIL;
+  const expectedPassword = process.env.ADMIN_PASSWORD;
+  if (!expectedEmail) throw new Error("ADMIN_EMAIL is not set.");
+  if (!expectedPassword) throw new Error("ADMIN_PASSWORD is not set.");
+
+  const emailOk = safeEqual(normalizeEmail(email), normalizeEmail(expectedEmail));
+  const passwordOk = safeEqual(password, expectedPassword);
+  return emailOk && passwordOk;
 }
 
 export async function startSession(): Promise<void> {

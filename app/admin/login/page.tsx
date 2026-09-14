@@ -24,8 +24,20 @@ function LoginForm() {
       </div>
 
       <input type="hidden" name="next" value={next} />
-      <label className="admin-label" htmlFor="password">Password</label>
-      <input id="password" name="password" type="password" autoComplete="current-password" required autoFocus className="admin-input" />
+
+      <label className="admin-label" htmlFor="email">Email address</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        autoComplete="username"
+        required
+        autoFocus
+        className="admin-input"
+      />
+
+      <label className="admin-label mt-4" htmlFor="password">Password</label>
+      <input id="password" name="password" type="password" autoComplete="current-password" required className="admin-input" />
 
       {state && !state.ok && <p className="mt-3 text-sm text-[var(--a-danger)]">{state.error}</p>}
 

@@ -41,15 +41,17 @@ content/*.json      lib/store.ts         lib/content.ts        pages
 - **`lib/admin-actions.ts`** — the server actions the dashboard calls. Every
   write is validated against a zod schema in **`lib/schemas.ts`** before it
   touches disk, then `revalidatePath("/", "layout")` refreshes the public pages.
-- **Auth** — one shared password (`ADMIN_PASSWORD`). A successful login gets an
-  HMAC-signed cookie (`AUTH_SECRET`) checked by `middleware.ts` on every
-  `/admin` request. Session lasts 12 hours. For named users later, widen the
-  token payload in `lib/session.ts` and add a lookup in `lib/auth.ts`.
+- **Auth** — one shared account, an email + password pair (`ADMIN_EMAIL` /
+  `ADMIN_PASSWORD`). A successful login gets an HMAC-signed cookie
+  (`AUTH_SECRET`) checked by `middleware.ts` on every `/admin` request. Session
+  lasts 12 hours. For named users later, widen the token payload in
+  `lib/session.ts` and add a lookup in `lib/auth.ts`.
 - **Uploads** — `lib/uploads.ts` writes to `CONTENT_DIR/uploads`, served back
   through `/api/media/<name>`. Pixel dimensions are read from the file header on
   upload and stored with the reference.
-- Public pages are `export const dynamic = "force-dynamic"` — rendered per
-  request on the Node server, so an edit shows on the next page load.
+- Public pages are statically rendered with `export const revalidate = 3600` —
+  fast static HTML, regenerated the moment content is saved (`revalidatePath`)
+  and hourly as a fallback.
 
 ## Environment variables
 
@@ -57,6 +59,7 @@ Copy `.env.example` to `.env` and set:
 
 | Variable | Purpose |
 | --- | --- |
+| `ADMIN_EMAIL` | Email address for `/admin/login`. |
 | `ADMIN_PASSWORD` | Password for `/admin/login`. Make it long. |
 | `AUTH_SECRET` | Signs the session cookie. 32+ random chars. Generate: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` |
 | `CONTENT_DIR` | Absolute path to a folder **outside** the app for saved content + uploads. Defaults to `./data` in development. |

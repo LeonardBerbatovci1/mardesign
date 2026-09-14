@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { checkPassword, endSession, isAuthenticated, startSession } from "./auth";
+import { checkCredentials, endSession, isAuthenticated, startSession } from "./auth";
 import { SCHEMA_BY_DOC } from "./schemas";
 import { type DocName, readDoc, resetDoc, writeDoc } from "./store";
 import { deleteUpload, saveUpload } from "./uploads";
@@ -16,12 +16,13 @@ export async function loginAction(
   _prev: ActionResult | null,
   formData: FormData,
 ): Promise<ActionResult> {
+  const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
   const next = String(formData.get("next") ?? "/admin");
 
   try {
-    if (!checkPassword(password)) {
-      return { ok: false, error: "Wrong password." };
+    if (!checkCredentials(email, password)) {
+      return { ok: false, error: "Wrong email or password." };
     }
   } catch (e) {
     return { ok: false, error: (e as Error).message };
