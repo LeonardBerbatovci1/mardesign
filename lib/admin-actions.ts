@@ -44,7 +44,13 @@ export async function loginAction(
     return { ok: false, error: "Wrong email or password." };
   }
 
-  await startSession(check.email);
+  try {
+    await startSession(check.email);
+  } catch (e) {
+    // e.g. AUTH_SECRET missing/too short in the environment — show it on the
+    // login form instead of an uncaught server exception.
+    return { ok: false, error: (e as Error).message };
+  }
   redirect(next.startsWith("/admin") ? next : "/admin");
 }
 
@@ -77,11 +83,10 @@ export async function setupAction(
   let user;
   try {
     user = await createUser(parsed.data.name, parsed.data.email, parsed.data.password);
+    await startSession(user.email);
   } catch (e) {
     return { ok: false, error: (e as Error).message };
   }
-
-  await startSession(user.email);
   redirect("/admin");
 }
 
