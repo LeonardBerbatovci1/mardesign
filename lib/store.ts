@@ -68,10 +68,40 @@ export async function writeAtomic(file: string, data: string): Promise<void> {
   await fs.rename(tmp, file);
 }
 
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+/**
+ * Fill in any key missing from a saved document with the value from the
+ * current defaults, at any depth — so adding a new field to a content type
+ * (like site.seo or site.business) never crashes a site whose saved file on
+ * disk predates that field. A key that IS present in the saved document
+ * always wins, including an intentionally empty array or empty string; this
+ * only backfills what's truly absent, never overwrites an edit.
+ */
+function backfillDefaults<T>(saved: unknown, defaults: T): T {
+  if (!isPlainObject(defaults)) {
+    return saved === undefined ? defaults : (saved as T);
+  }
+  const savedObj = isPlainObject(saved) ? saved : {};
+  const result: Record<string, unknown> = { ...savedObj };
+  for (const key of Object.keys(defaults)) {
+    const defaultValue = (defaults as Record<string, unknown>)[key];
+    if (!(key in savedObj)) {
+      result[key] = defaultValue;
+    } else if (isPlainObject(defaultValue)) {
+      result[key] = backfillDefaults(savedObj[key], defaultValue);
+    }
+  }
+  return result as T;
+}
+
 export async function readDoc<T>(name: DocName): Promise<T> {
   const file = docPath(name);
   try {
-    return JSON.parse(await fs.readFile(file, "utf8")) as T;
+    const parsed = JSON.parse(await fs.readFile(file, "utf8"));
+    return backfillDefaults(parsed, DEFAULTS[name]) as T;
   } catch {
     // No saved copy yet (fresh install), or the file is unreadable: serve the
     // defaults checked into /content. The first admin save writes a real file.
