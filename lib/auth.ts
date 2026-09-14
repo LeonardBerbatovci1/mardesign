@@ -1,7 +1,15 @@
 /**
- * Node-side auth helpers for the admin area. Password check + session cookie
- * management. Token signing itself lives in lib/session.ts so the middleware
- * can share it on the Edge runtime.
+ * Node-side auth helpers for the admin area.
+ *
+ * Two ways to sign in, checked in order:
+ *  1. The "owner" account — ADMIN_EMAIL / ADMIN_PASSWORD in the environment.
+ *     Always available, never stored on disk. This is the recovery login:
+ *     it keeps working even if every dashboard-managed user is deleted.
+ *  2. Named accounts managed from /admin/users (lib/users.ts), stored as
+ *     salted-hash passwords in CONTENT_DIR/users.json.
+ *
+ * Session cookie management + token signing: token signing itself lives in
+ * lib/session.ts so the middleware can share it on the Edge runtime.
  */
 import "server-only";
 
@@ -13,8 +21,9 @@ import {
   createSessionToken,
   verifySessionToken,
 } from "./session";
+import { findUserByEmail, hasAnyUsers, verifyPasswordHash } from "./users";
 
-/** Timing-safe compare without pulling in node:crypto. */
+/** Timing-safe compare without pulling in node:crypto (this file also runs paths shared with Edge-adjacent code). */
 function safeEqual(a: string, b: string): boolean {
   if (a.length !== b.length) return false;
   let out = 0;
@@ -27,24 +36,41 @@ function normalizeEmail(input: string): string {
 }
 
 /**
- * Check an email + password pair against the single admin account configured
- * in the environment. Both must match — the caller shows one generic error
- * either way, so a wrong guess never reveals which field was incorrect.
+ * Check an email + password pair against the owner account and, failing
+ * that, the stored users. Returns the identity on success so the caller can
+ * start a session for it. The caller shows one generic error either way, so
+ * a wrong guess never reveals which field — or which account — was wrong.
  */
-export function checkCredentials(email: string, password: string): boolean {
-  const expectedEmail = process.env.ADMIN_EMAIL;
-  const expectedPassword = process.env.ADMIN_PASSWORD;
-  if (!expectedEmail) throw new Error("ADMIN_EMAIL is not set.");
-  if (!expectedPassword) throw new Error("ADMIN_PASSWORD is not set.");
+export async function checkCredentials(
+  email: string,
+  password: string,
+): Promise<{ ok: true; email: string } | { ok: false }> {
+  const ownerEmail = process.env.ADMIN_EMAIL;
+  const ownerPassword = process.env.ADMIN_PASSWORD;
+  const hasOwner = Boolean(ownerEmail && ownerPassword);
 
-  const emailOk = safeEqual(normalizeEmail(email), normalizeEmail(expectedEmail));
-  const passwordOk = safeEqual(password, expectedPassword);
-  return emailOk && passwordOk;
+  if (hasOwner) {
+    const emailOk = safeEqual(normalizeEmail(email), normalizeEmail(ownerEmail!));
+    const passwordOk = safeEqual(password, ownerPassword!);
+    if (emailOk && passwordOk) return { ok: true, email: normalizeEmail(ownerEmail!) };
+  }
+
+  const user = await findUserByEmail(email);
+  if (user && (await verifyPasswordHash(password, user.passwordHash))) {
+    return { ok: true, email: user.email };
+  }
+
+  if (!hasOwner && !(await hasAnyUsers())) {
+    throw new Error(
+      "No admin account is set up yet. Set ADMIN_EMAIL and ADMIN_PASSWORD in the environment (see docs/DEPLOY-HOSTINGER.md), then add named users from the dashboard.",
+    );
+  }
+  return { ok: false };
 }
 
-export async function startSession(): Promise<void> {
+export async function startSession(email: string): Promise<void> {
   const jar = await cookies();
-  jar.set(SESSION_COOKIE, await createSessionToken(), {
+  jar.set(SESSION_COOKIE, await createSessionToken(email), {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
@@ -59,7 +85,15 @@ export async function endSession(): Promise<void> {
 
 export async function isAuthenticated(): Promise<boolean> {
   const jar = await cookies();
-  return verifySessionToken(jar.get(SESSION_COOKIE)?.value);
+  const check = await verifySessionToken(jar.get(SESSION_COOKIE)?.value);
+  return check.ok;
+}
+
+/** The email of the signed-in account, or null if not authenticated. */
+export async function getSessionEmail(): Promise<string | null> {
+  const jar = await cookies();
+  const check = await verifySessionToken(jar.get(SESSION_COOKIE)?.value);
+  return check.ok ? check.email : null;
 }
 
 export { SESSION_COOKIE };

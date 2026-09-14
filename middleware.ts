@@ -13,8 +13,8 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const ok = await verifySessionToken(req.cookies.get(SESSION_COOKIE)?.value);
-  if (ok) return NextResponse.next();
+  const check = await verifySessionToken(req.cookies.get(SESSION_COOKIE)?.value);
+  if (check.ok) return NextResponse.next();
 
   const url = req.nextUrl.clone();
   url.pathname = "/admin/login";

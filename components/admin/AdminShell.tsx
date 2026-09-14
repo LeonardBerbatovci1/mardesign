@@ -16,9 +16,16 @@ const NAV: { href: string; label: string; group: string }[] = [
   { href: "/admin/site", label: "Header, footer & links", group: "Site-wide" },
   { href: "/admin/theme", label: "Colours", group: "Site-wide" },
   { href: "/admin/media", label: "Media library", group: "Site-wide" },
+  { href: "/admin/users", label: "Dashboard users", group: "Site-wide" },
 ];
 
-export function AdminShell({ children }: { children: React.ReactNode }) {
+export function AdminShell({
+  children,
+  email,
+}: {
+  children: React.ReactNode;
+  email: string;
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -117,6 +124,9 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
           </nav>
 
           <div className="border-t border-[var(--a-border)] p-3">
+            <p className="truncate px-3 pb-1 pt-2 text-xs text-[var(--a-faint)]" title={email}>
+              Signed in as {email}
+            </p>
             <a
               href="/"
               target="_blank"

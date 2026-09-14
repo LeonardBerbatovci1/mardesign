@@ -15,6 +15,7 @@ appear on the live site immediately.
 | **Header, footer & links** | Wordmark, tagline, handwritten line, main menu, the extra "+" menu items, the CTA button, social links, address lines, email, opening hours. |
 | **Colours** | The seven palette colours, with a live preview. Applies site-wide. |
 | **Media library** | Every uploaded image. Upload or delete. |
+| **Dashboard users** | Who can sign in. Add a named account (name, email, password) instead of sharing one login; edit or remove them. |
 
 Every editor has **Save changes**, **Undo edits** (revert unsaved work) and
 **Restore original** (roll that section back to the content shipped with the
@@ -41,11 +42,18 @@ content/*.json      lib/store.ts         lib/content.ts        pages
 - **`lib/admin-actions.ts`** — the server actions the dashboard calls. Every
   write is validated against a zod schema in **`lib/schemas.ts`** before it
   touches disk, then `revalidatePath("/", "layout")` refreshes the public pages.
-- **Auth** — one shared account, an email + password pair (`ADMIN_EMAIL` /
-  `ADMIN_PASSWORD`). A successful login gets an HMAC-signed cookie
-  (`AUTH_SECRET`) checked by `middleware.ts` on every `/admin` request. Session
-  lasts 12 hours. For named users later, widen the token payload in
-  `lib/session.ts` and add a lookup in `lib/auth.ts`.
+- **Auth** — two ways in, checked in order (`lib/auth.ts`):
+  1. The **owner account** — `ADMIN_EMAIL` / `ADMIN_PASSWORD` in the
+     environment. Never stored on disk, always works. This is the recovery
+     login if the users list below is ever empty or the wrong people are
+     in it.
+  2. **Named users**, managed from **Dashboard users** (`lib/users.ts`),
+     stored at `CONTENT_DIR/users.json` with salted, hashed passwords
+     (`node:crypto.scrypt` — never plaintext).
+
+  A successful login gets an HMAC-signed cookie (`AUTH_SECRET`) carrying the
+  signed-in email, checked by `middleware.ts` on every `/admin` request.
+  Session lasts 12 hours.
 - **Uploads** — `lib/uploads.ts` writes to `CONTENT_DIR/uploads`, served back
   through `/api/media/<name>`. Pixel dimensions are read from the file header on
   upload and stored with the reference.
@@ -59,7 +67,7 @@ Copy `.env.example` to `.env` and set:
 
 | Variable | Purpose |
 | --- | --- |
-| `ADMIN_EMAIL` | Email address for `/admin/login`. |
-| `ADMIN_PASSWORD` | Password for `/admin/login`. Make it long. |
+| `ADMIN_EMAIL` | Owner login email — the recovery account, works even if Dashboard users is empty. |
+| `ADMIN_PASSWORD` | Owner login password. Make it long. |
 | `AUTH_SECRET` | Signs the session cookie. 32+ random chars. Generate: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` |
 | `CONTENT_DIR` | Absolute path to a folder **outside** the app for saved content + uploads. Defaults to `./data` in development. |

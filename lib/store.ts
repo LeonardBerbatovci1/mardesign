@@ -55,8 +55,13 @@ function docPath(name: DocName): string {
   return path.join(contentDir(), `${name}.json`);
 }
 
-/** Write via a temp file + rename so a crash mid-write cannot truncate a document. */
-async function writeAtomic(file: string, data: string): Promise<void> {
+/**
+ * Write via a temp file + rename so a crash mid-write cannot truncate a
+ * document. Exported for lib/users.ts, which keeps its own JSON file
+ * (users.json) outside the DOC_NAMES content system — it's a growing
+ * collection with secrets in it, not a single editable settings document.
+ */
+export async function writeAtomic(file: string, data: string): Promise<void> {
   await fs.mkdir(path.dirname(file), { recursive: true });
   const tmp = `${file}.${process.pid}.tmp`;
   await fs.writeFile(tmp, data, "utf8");

@@ -35,8 +35,8 @@ or "ADMIN_PASSWORD is not set" until the first three rows are in place.
 
 | Name | Value | How to get it |
 | --- | --- | --- |
-| `ADMIN_EMAIL` | the client's dashboard login email | any address, doesn't need to receive mail — it's just the username |
-| `ADMIN_PASSWORD` | the client's dashboard password | pick a long passphrase, e.g. `lantern-vellum-delta-meadow-1994` |
+| `ADMIN_EMAIL` | the owner login's email | any address, doesn't need to receive mail — it's just the username. This account always works, even if every user in Dashboard users is deleted. |
+| `ADMIN_PASSWORD` | the owner login's password | pick a long passphrase, e.g. `lantern-vellum-delta-meadow-1994` |
 | `AUTH_SECRET` | a 64-char random string | run `openssl rand -hex 32` in SSH, or `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` |
 | `CONTENT_DIR` | absolute path to the folder from step 2 | run `pwd` inside `~/mardesign-data` over SSH and copy the result, e.g. `/home/u123456/mardesign-data` |
 | `NEXT_PUBLIC_SITE_URL` | the live domain, no trailing slash | e.g. `https://mardesign-ks.com` |
@@ -58,6 +58,8 @@ domain slot.
 
 - Dashboard: `https://<domain>/admin`
 - Give them the `ADMIN_EMAIL` + `ADMIN_PASSWORD` pair only. Keep `AUTH_SECRET` private.
+- From there, they can add named logins for teammates themselves under
+  **Dashboard users** — no more Hostinger access needed for that.
 
 ## Redeploying (code changes)
 
@@ -66,7 +68,8 @@ Push to the connected branch (or re-upload the zip) and Hostinger rebuilds.
 
 ## Backups
 
-Everything the client owns is in `CONTENT_DIR`. To back up:
+Everything the client owns is in `CONTENT_DIR` — content, uploads, and
+`users.json` (dashboard login accounts, password hashes only). To back up:
 
 ```bash
 tar czf mardesign-backup-$(date +%F).tgz -C ~/mardesign-data .

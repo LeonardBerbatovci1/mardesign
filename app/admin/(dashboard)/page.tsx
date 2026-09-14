@@ -8,6 +8,7 @@ const CARDS = [
   { href: "/admin/site", title: "Header, footer & links", body: "Menus, the CTA button, social links, address, email and hours." },
   { href: "/admin/theme", title: "Colours", body: "The site palette. Changes apply everywhere at once." },
   { href: "/admin/media", title: "Media library", body: "Every uploaded image. Upload new files or delete unused ones." },
+  { href: "/admin/users", title: "Dashboard users", body: "Who can sign in. Add a teammate instead of sharing your own login." },
 ];
 
 export default function AdminHome() {

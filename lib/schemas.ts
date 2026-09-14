@@ -168,6 +168,22 @@ export const themeSchema = z.object({
   }),
 });
 
+/* ── dashboard users (not a DOC_NAMES content document) ─────────────── */
+
+export const newUserSchema = z.object({
+  name: nonEmpty,
+  email: z.string().trim().toLowerCase().email("Enter a valid email address"),
+  password: z.string().min(8, "At least 8 characters"),
+});
+
+export const updateUserSchema = z.object({
+  id: nonEmpty,
+  name: nonEmpty,
+  email: z.string().trim().toLowerCase().email("Enter a valid email address"),
+  // Blank means "leave the password unchanged".
+  password: z.union([z.string().min(8, "At least 8 characters"), z.literal("")]),
+});
+
 import type { DocName } from "./store";
 
 export const SCHEMA_BY_DOC = {

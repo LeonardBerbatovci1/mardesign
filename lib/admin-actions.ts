@@ -3,10 +3,23 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { checkCredentials, endSession, isAuthenticated, startSession } from "./auth";
-import { SCHEMA_BY_DOC } from "./schemas";
+import {
+  checkCredentials,
+  endSession,
+  getSessionEmail,
+  isAuthenticated,
+  startSession,
+} from "./auth";
+import { newUserSchema, updateUserSchema, SCHEMA_BY_DOC } from "./schemas";
 import { type DocName, readDoc, resetDoc, writeDoc } from "./store";
 import { deleteUpload, saveUpload } from "./uploads";
+import {
+  createUser,
+  deleteUser,
+  listPublicUsers,
+  updateUser,
+  type PublicUser,
+} from "./users";
 
 export type ActionResult = { ok: true } | { ok: false; error: string };
 
@@ -20,15 +33,17 @@ export async function loginAction(
   const password = String(formData.get("password") ?? "");
   const next = String(formData.get("next") ?? "/admin");
 
+  let check: Awaited<ReturnType<typeof checkCredentials>>;
   try {
-    if (!checkCredentials(email, password)) {
-      return { ok: false, error: "Wrong email or password." };
-    }
+    check = await checkCredentials(email, password);
   } catch (e) {
     return { ok: false, error: (e as Error).message };
   }
+  if (!check.ok) {
+    return { ok: false, error: "Wrong email or password." };
+  }
 
-  await startSession();
+  await startSession(check.email);
   redirect(next.startsWith("/admin") ? next : "/admin");
 }
 
@@ -89,6 +104,72 @@ export async function resetDocAction(doc: DocName): Promise<ActionResult> {
 export async function getDocAction<T>(doc: DocName): Promise<T> {
   await assertAuthed();
   return readDoc<T>(doc);
+}
+
+/* ── users ────────────────────────────────────────────────────────── */
+
+export async function listUsersAction(): Promise<PublicUser[]> {
+  await assertAuthed();
+  return listPublicUsers();
+}
+
+/** The account currently signed in — shown in the sidebar and the Users page. */
+export async function currentUserEmailAction(): Promise<string | null> {
+  return getSessionEmail();
+}
+
+type UserActionResult = { ok: true; user: PublicUser } | { ok: false; error: string };
+
+export async function createUserAction(formData: FormData): Promise<UserActionResult> {
+  try {
+    await assertAuthed();
+    const parsed = newUserSchema.safeParse({
+      name: formData.get("name"),
+      email: formData.get("email"),
+      password: formData.get("password"),
+    });
+    if (!parsed.success) {
+      return { ok: false, error: parsed.error.issues[0]?.message ?? "Invalid input." };
+    }
+    const user = await createUser(parsed.data.name, parsed.data.email, parsed.data.password);
+    revalidatePath("/admin/users");
+    return { ok: true, user };
+  } catch (e) {
+    return { ok: false, error: (e as Error).message };
+  }
+}
+
+export async function updateUserAction(
+  id: string,
+  patch: { name: string; email: string; password: string },
+): Promise<UserActionResult> {
+  try {
+    await assertAuthed();
+    const parsed = updateUserSchema.safeParse({ id, ...patch });
+    if (!parsed.success) {
+      return { ok: false, error: parsed.error.issues[0]?.message ?? "Invalid input." };
+    }
+    const user = await updateUser(parsed.data.id, {
+      name: parsed.data.name,
+      email: parsed.data.email,
+      password: parsed.data.password || undefined,
+    });
+    revalidatePath("/admin/users");
+    return { ok: true, user };
+  } catch (e) {
+    return { ok: false, error: (e as Error).message };
+  }
+}
+
+export async function deleteUserAction(id: string): Promise<ActionResult> {
+  try {
+    await assertAuthed();
+    await deleteUser(id);
+    revalidatePath("/admin/users");
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: (e as Error).message };
+  }
 }
 
 /* ── media ────────────────────────────────────────────────────────── */
